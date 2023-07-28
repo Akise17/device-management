@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_26_142757) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_28_164045) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -36,16 +36,36 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_142757) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_superadmin", default: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
   create_table "devices", force: :cascade do |t|
     t.string "device_id"
-    t.integer "send_interval"
-    t.boolean "alarm_state"
+    t.integer "send_interval", default: 5
+    t.boolean "alarm_state", default: false
     t.string "sensor_type"
     t.string "device_type"
+    t.json "config"
+    t.index ["device_id"], name: "index_devices_on_device_id"
+  end
+
+  create_table "metrics", force: :cascade do |t|
+    t.string "device_id"
+    t.integer "raw_data"
+    t.float "readable_data"
+    t.string "unit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["device_id"], name: "index_metrics_on_device_id"
+  end
+
+  create_table "settings", force: :cascade do |t|
+    t.string "name"
+    t.string "value"
+    t.string "value_type"
+    t.text "description"
   end
 
 end

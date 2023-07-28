@@ -1,0 +1,2 @@
+rails: bundle exec puma -C config/puma.rb -p 3000
+python: python3 -u data_subscriber.py

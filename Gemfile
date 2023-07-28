@@ -4,9 +4,12 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.1.1'
 
 gem 'activeadmin'
+gem 'activeadmin_json_editor'
+gem 'active_model_serializers'
 gem 'bootsnap', require: false
 gem 'devise'
-gem 'figaro'
+gem 'dotenv-rails'
+gem 'foreman'
 gem 'importmap-rails'
 gem 'jbuilder'
 gem 'pg', '~> 1.1'
