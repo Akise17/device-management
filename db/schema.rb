@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_28_164045) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_29_075231) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,6 +48,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_28_164045) do
     t.string "sensor_type"
     t.string "device_type"
     t.json "config"
+    t.string "location"
+    t.text "location_url"
     t.index ["device_id"], name: "index_devices_on_device_id"
   end
 

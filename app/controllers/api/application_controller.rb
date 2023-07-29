@@ -1,4 +1,6 @@
 class Api::ApplicationController < ApplicationController
+  include Rails.application.routes.url_helpers
+  protect_from_forgery with: :null_session
   before_action :authenticate_api!
 
   private

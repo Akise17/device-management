@@ -10,8 +10,14 @@ ActiveAdmin.register_page 'Dashboard' do
             column :device_id
             column :alarm_state
             column :device_type
-            column 'Link to Show' do |device|
-              link_to 'View Device', admin_device_path(device)
+            column :location do |device|
+              a device.location, href: device.location_url, target: '_blank'
+            end
+            column 'Action' do |device|
+              links = []
+              links << link_to('View Device', admin_device_path(device))
+              links << link_to('Restart Device', api_v1_device_setting_path(device.device_id, 'restart'))
+              links << link_to('Reset Sensor', api_v1_device_setting_path(device.device_id, 'reset_sensor'))
             end
           end
         end

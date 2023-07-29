@@ -5,13 +5,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  get '/', to: redirect('/admin')
+  get '/', to: redirect('/admin'), as: :root
 
   namespace :api do
     namespace :v1 do
+      get '/device/setting/:device_id/:command', to: 'device#setting', as: :device_setting
       resources :device
     end
   end
 end
-
-

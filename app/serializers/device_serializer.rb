@@ -7,6 +7,6 @@ class DeviceSerializer < ActiveModel::Serializer
   end
 
   attribute :last_data do
-    object.metrics.last.raw_data
+    object.metrics&.last&.raw_data || 0
   end
 end

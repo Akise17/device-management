@@ -1,5 +1,6 @@
 ActiveAdmin.register Device do
-  permit_params :device_id, :send_interval, :alarm_state, :sensor_type, :device_type, :config
+  permit_params :device_id, :send_interval, :alarm_state, :sensor_type,
+                :device_type, :config, :location, :location_url
 
   json_editor
   DEVICE_TYPE_OPTIONS = { 'Accelerometer' => 'accelerometer',
@@ -13,6 +14,8 @@ ActiveAdmin.register Device do
       f.input :alarm_state
       f.input :sensor_type
       f.input :device_type, as: :select, collection: DEVICE_TYPE_OPTIONS
+      f.input :location
+      f.input :location_url
       f.input :config, as: :json
     end
     f.actions
