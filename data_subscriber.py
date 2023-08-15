@@ -92,14 +92,19 @@ class Calculation:
 
     
 # Main Program
-print("Start data subscription")
-client = mqtt.Client()
+while True:
+    print("Start data subscription")
+    client = mqtt.Client("", True, None, mqtt.MQTTv31)
 
-client.on_connect = on_connect
-client.on_message = on_message
+    client.on_connect = on_connect
+    client.on_message = on_message
 
-client.username_pw_set(broker_user, broker_pass)
-client.connect(broker_host, broker_port, 60)
-print("Client Connected")
+    client.username_pw_set(broker_user, broker_pass)
+    client.connect(broker_host, broker_port, 60)
+    print("Client Connected")
+    print("mqtt://" + broker_user + ":" + broker_pass + "@" + broker_host + ":" + broker_pass)
 
-client.loop_forever()
+    try:
+        client.loop_forever()
+    except:
+        print("Disconnected try to reconnect")

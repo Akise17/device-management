@@ -60,14 +60,19 @@ def on_message(client, userdata, msg):
         print("Save Failed")
     
 # Main Program
-print("Start alarm subscription")
-client = mqtt.Client()
+while True:
+    print("Start alarm subscription")
+    client = mqtt.Client("", True, None, mqtt.MQTTv31)
 
-client.on_connect = on_connect
-client.on_message = on_message
+    client.username_pw_set(broker_user, broker_pass)
 
-client.username_pw_set(broker_user, broker_pass)
-client.connect(broker_host, broker_port, 60)
-print("Client Connected")
+    client.on_connect = on_connect
+    client.on_message = on_message
 
-client.loop_forever()
+    client.connect(broker_host, broker_port, 20)
+    print("Client Connected")
+
+    try:
+        client.loop_forever()
+    except:
+        print("Disconnected try to reconnect")
