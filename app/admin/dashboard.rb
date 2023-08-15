@@ -13,6 +13,18 @@ ActiveAdmin.register_page 'Dashboard' do
             column :location do |device|
               a device.location, href: device.location_url, target: '_blank'
             end
+            column 'status' do |device|
+
+              if !device.metrics.last&.created_at.blank?
+                if device.metrics.last.created_at >= DateTime.now - 5.minute
+                  'Active'
+                else
+                  'Inactive'
+                end
+              else
+                'N/A'
+              end
+            end
             column 'Action' do |device|
               links = []
               links << link_to('View Device', admin_device_path(device))

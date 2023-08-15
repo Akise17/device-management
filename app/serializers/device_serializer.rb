@@ -9,4 +9,8 @@ class DeviceSerializer < ActiveModel::Serializer
   attribute :last_data do
     object.metrics&.last&.raw_data || 0
   end
+
+  attribute :current_time do
+    DateTime.now.in_time_zone('Asia/Makassar').strftime('%d-%m-%y-%H-%M-%S')
+  end
 end
